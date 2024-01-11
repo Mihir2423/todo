@@ -3,7 +3,7 @@
 import moment from "moment";
 import { v4 as uuid } from "uuid";
 import { MessageData } from "@/utils/messageGenerator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { AnimatedListItem } from "@/components/animated-list-item";
 import { MdDelete } from "react-icons/md";
@@ -12,7 +12,10 @@ import { CiBookmarkPlus } from "react-icons/ci";
 import { EditModal } from "@/components/modal";
 
 export default function Home() {
-  const [messages, setMessages] = useState<MessageData[]>([]);
+  const [messages, setMessages] = useState<MessageData[]>(() => {
+    const storedMessages = localStorage.getItem("todoMessages");
+    return storedMessages ? JSON.parse(storedMessages) : [];
+  });
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
   const [task, setTask] = useState<string>("");
 
@@ -47,6 +50,10 @@ export default function Home() {
     );
     setSelectedMessages([]);
   };
+
+  useEffect(() => {
+    localStorage.setItem("todoMessages", JSON.stringify(messages));
+  }, [messages]);
 
   return (
     <main className="flex min-h-screen flex-col gap-4 items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-500 to-zinc-900">
