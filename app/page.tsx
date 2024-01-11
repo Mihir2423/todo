@@ -13,8 +13,12 @@ import { EditModal } from "@/components/modal";
 
 export default function Home() {
   const [messages, setMessages] = useState<MessageData[]>(() => {
-    const storedMessages = localStorage.getItem("todoMessages");
-    return storedMessages ? JSON.parse(storedMessages) : [];
+    if (typeof window !== "undefined") {
+      const storedMessages = localStorage.getItem("todoMessages");
+      return storedMessages ? JSON.parse(storedMessages) : [];
+    } else {
+      return [];
+    }
   });
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
   const [task, setTask] = useState<string>("");
@@ -52,7 +56,9 @@ export default function Home() {
   };
 
   useEffect(() => {
-    localStorage.setItem("todoMessages", JSON.stringify(messages));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("todoMessages", JSON.stringify(messages));
+    }
   }, [messages]);
 
   return (
