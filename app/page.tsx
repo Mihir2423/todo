@@ -63,7 +63,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col gap-4 items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-500 to-zinc-900 max-md:px-2">
-      <h1 className="text-neutral-50 text-6xl font-bold">To-do List 📋</h1>
+      <h1 className="text-neutral-50 text-3xl md:text-6xl font-bold">To-do List 📋</h1>
       <div className="h-[400px] w-full max-w-lg">
         <div className="bg-white rounded-xl">
           <div className="flex gap-3 w-full border-b-zinc-100 border-b-[1px] p-4">
